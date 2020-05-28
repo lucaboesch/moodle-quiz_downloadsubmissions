@@ -56,7 +56,7 @@ class quiz_downloadsubmissions_report extends quiz_attempts_report {
         $hasessayquestions = false;
         if ($questions) {
 	        foreach ($questions as $question) {
-	        	if ($question->qtype == 'essay' || $question->qtype == 'random') {
+                        if ($question->qtype == 'essay' || $question->qtype == 'random' || $question->qtype == 'fileresponse') {
 	        		$hasessayquestions = true;
 	        		break;
 	        	}
@@ -168,7 +168,7 @@ class quiz_downloadsubmissions_report extends quiz_attempts_report {
               JOIN {quiz_slots} slot ON slot.questionid = q.id
 
              WHERE q.qtype = 'essay'
-
+                OR q.qtype = 'fileresponse'
           ORDER BY slot.slot", array($quiz->id));
     }
 
@@ -270,7 +270,8 @@ class quiz_downloadsubmissions_report extends quiz_attempts_report {
     		$qa = $quba->get_question_attempt($student->slot);
     		$quba_contextid = $quba->get_owning_context()->id;
 
-    		if ($qa->get_question()->get_type_name() == 'essay') {
+                if (($qa->get_question()->get_type_name() == 'essay') OR
+                    ($qa->get_question()->get_type_name() == 'fileresponse')) {
     		    $questionname = $qa->get_question()->name;
     		    $prefix1 .= ' - ' . $questionname;
 
