@@ -25,10 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2020100700;
+$plugin->version   = 2025071200;
 $plugin->requires  = 2017051500;
 $plugin->cron      = 18000;
 $plugin->component = 'quiz_downloadsubmissions';
 $plugin->maturity  = MATURITY_BETA;
-$plugin->release   = '1.1-r2';
+$plugin->release   = '5.0-r1';
 
